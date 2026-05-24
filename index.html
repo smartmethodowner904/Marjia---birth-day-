@@ -1,37 +1,312 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Marjia Kolixa</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>শুভ জন্মদিন</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family: 'Hind Siliguri', sans-serif;
+      background: linear-gradient(135deg,#ffe6f2,#fff6d1,#e8fff2);
+      min-height:100vh;
+      overflow-x:hidden;
+      padding:20px;
+    }
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(255,255,255,.8);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      z-index:999;
+      backdrop-filter: blur(5px);
+    }
+
+    .welcome-box{
+      background:white;
+      width:90%;
+      max-width:350px;
+      border-radius:25px;
+      padding:30px 20px;
+      text-align:center;
+      box-shadow:0 10px 40px rgba(0,0,0,.15);
+      animation: popup .7s ease;
+    }
+
+    @keyframes popup{
+      from{
+        transform:scale(.7);
+        opacity:0;
+      }
+      to{
+        transform:scale(1);
+        opacity:1;
+      }
+    }
+
+    .welcome-box h1{
+      font-size:38px;
+      margin-bottom:10px;
+    }
+
+    .welcome-box p{
+      color:#666;
+      margin-bottom:25px;
+      font-size:18px;
+    }
+
+    .btn{
+      border:none;
+      padding:14px 40px;
+      border-radius:50px;
+      font-size:20px;
+      font-weight:bold;
+      cursor:pointer;
+      background: linear-gradient(45deg,#ff5ea8,#ffb300);
+      color:white;
+      box-shadow:0 8px 20px rgba(255,120,120,.4);
+    }
+
+    .main{
+      display:none;
+      animation: fade .8s ease;
+    }
+
+    @keyframes fade{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .title{
+      text-align:center;
+      margin:30px 0;
+    }
+
+    .title h1{
+      font-size:45px;
+      background: linear-gradient(45deg,#ff6600,#ff00c8);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .title p{
+      margin-top:10px;
+      color:#444;
+      font-size:22px;
+    }
+
+    .message{
+      background:white;
+      padding:25px;
+      border-radius:25px;
+      line-height:1.8;
+      font-size:20px;
+      text-align:center;
+      box-shadow:0 10px 25px rgba(0,0,0,.08);
+      margin-bottom:25px;
+    }
+
+    .card{
+      padding:30px 20px;
+      border-radius:25px;
+      margin-bottom:20px;
+      text-align:center;
+      box-shadow:0 10px 25px rgba(0,0,0,.08);
+      border:3px solid rgba(255,255,255,.6);
+    }
+
+    .card span{
+      font-size:40px;
+      display:block;
+      margin-bottom:15px;
+    }
+
+    .card h2{
+      margin-bottom:10px;
+      font-size:28px;
+    }
+
+    .card p{
+      font-size:18px;
+      color:#444;
+    }
+
+    .yellow{
+      background:#fff5c9;
+    }
+
+    .purple{
+      background:#f5ddff;
+    }
+
+    .green{
+      background:#dfffe7;
+    }
+
+    .pink{
+      background:#ffe3ef;
+    }
+
+    .footer{
+      margin-top:30px;
+      background:white;
+      border-radius:25px;
+      padding:30px;
+      text-align:center;
+      box-shadow:0 10px 25px rgba(0,0,0,.08);
+    }
+
+    .footer h2{
+      font-size:35px;
+      color:#d6008f;
+      margin-top:20px;
+    }
+
+    canvas{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+    }
+  </style>
 </head>
 <body>
 
-<div class="gift-container" id="giftBox">
-  <div class="gift-box">🎁</div>
-  <p>Tap The Gift</p>
+<canvas id="confetti"></canvas>
+
+<div class="overlay" id="overlay">
+  <div class="welcome-box">
+    <h1>🎉</h1>
+    <h2>একটি বিশেষ চমক অপেক্ষা করছে!</h2>
+
+    <p>নিচের বাটনে ক্লিক করো</p>
+
+    <button class="btn" onclick="openSite()">
+      স্বাগতম
+    </button>
+  </div>
 </div>
 
-<div class="main-content hidden" id="mainContent">
-  <h1>🎂 Happy Birthday 🎂</h1>
-  <h2>Marjia Kolixa 💖</h2>
+<div class="main" id="main">
 
-  <p class="message">
-    24 August — the day a beautiful soul was born ✨<br><br>
-    Tui amar life er onek special ekjon manush 🌸<br>
-    Allah tor sob sopno puron koruk 🤍
-  </p>
+  <div class="title">
+    <h1>শুভ জন্মদিন, মরিয়ম! 🎈</h1>
+    <p>তোমার দিনটি আনন্দে ভরে উঠুক 💖</p>
+  </div>
 
-  <div class="boom">🎉 🎊 💥</div>
+  <div class="message">
+    প্রিয় মরিয়ম, তোমার জন্য রইলো অসংখ্য শুভেচ্ছা ও ভালোবাসা।  
+    তোমার জীবনের প্রতিটি দিন হোক আনন্দময় ও সফলতায় ভরা ✨
+  </div>
+
+  <div class="card yellow">
+    <span>☀️</span>
+    <h2>আলো ও উষ্ণতার মুহূর্ত</h2>
+    <p>
+      তোমার জীবন সুখ, হাসি আর ভালোবাসায় ভরে উঠুক।
+    </p>
+  </div>
+
+  <div class="card purple">
+    <span>💎</span>
+    <h2>আনন্দের উজ্জ্বল চমক</h2>
+    <p>
+      প্রতিটি মুহূর্তে থাকুক সুখ আর হাসি।
+    </p>
+  </div>
+
+  <div class="card green">
+    <span>💚</span>
+    <h2>চিরস্থায়ী সতেজ সুখ</h2>
+    <p>
+      সারাবছর তোমার জীবন সুন্দর কাটুক।
+    </p>
+  </div>
+
+  <div class="card pink">
+    <span>💜</span>
+    <h2>রাজকীয় সম্মান</h2>
+    <p>
+      তুমি সবসময় বিশেষ একজন হয়ে থেকো।
+    </p>
+  </div>
+
+  <div class="footer">
+    <p>
+      এই বিশেষ দিনটি তোমার জীবনে বয়ে আনুক নতুন সুখ, ভালোবাসা ও সফলতা 💖
+    </p>
+
+    <h2>সাজিমের পক্ষ থেকে অভিনন্দন 🎉</h2>
+  </div>
+
 </div>
 
-<audio id="birthdayMusic" autoplay loop>
+<audio id="music" autoplay loop>
   <source src="music.mp3" type="audio/mp3">
 </audio>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script src="script.js"></script>
+<script>
+  function openSite(){
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("main").style.display = "block";
+
+    document.getElementById("music").play();
+  }
+
+  // Confetti Effect
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const pieces = [];
+
+  for(let i=0;i<120;i++){
+    pieces.push({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      r: Math.random()*6+2,
+      d: Math.random()*120
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    pieces.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`hsl(${p.d*3},100%,60%)`;
+      ctx.fill();
+
+      p.y += 2;
+      if(p.y > canvas.height){
+        p.y = -10;
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+</script>
 
 </body>
-</html>
+    </html>
